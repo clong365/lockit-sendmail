@@ -15,6 +15,10 @@ var Email = module.exports = function(config) {
   this.template = require(config.emailTemplate);
   this.transport = require(config.emailType);
   this.config = config;
+  
+  //Frank
+  this.config.signup.route = '#/signup';
+  this.config.forgotPassword.route = '#/forgot-password';
 };
 
 
@@ -55,7 +59,9 @@ Email.prototype.send = function(type, username, email, done) {
     };
 
     // send email with nodemailer
-    var transporter = nodemailer.createTransport(that.transport(options));
+    //var transporter = nodemailer.createTransport(that.transport(options));
+    //https://github.com/zemirco/lockit/issues/29#issuecomment-69494608
+    var transporter = nodemailer.createTransport(that.config.emailSettings); 
     transporter.sendMail(options, function(err, res){
       if(err) return done(err);
       transporter.close(); // shut down the connection pool, no more messages
