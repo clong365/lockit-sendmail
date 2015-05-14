@@ -15,7 +15,7 @@ var Email = module.exports = function(config) {
   this.template = require(config.emailTemplate);
   this.transport = require(config.emailType);
   this.config = config;
-  
+
   //Frank
   this.config.signup.route = '#/signup';
   this.config.forgotPassword.route = '#/forgot-password';
